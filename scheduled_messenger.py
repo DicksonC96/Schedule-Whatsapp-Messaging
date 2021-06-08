@@ -44,7 +44,7 @@ while True:
     options.add_experimental_option("excludeSwitches", ["enable-automation","enable-logging"])
     options.add_experimental_option('useAutomationExtension', False)
 
-    driver = webdriver.Chrome('C:\\Users\\DELL\\Desktop\\chromedriver.exe', options=options)
+    driver = webdriver.Chrome('C:\\Users\\DELL\\Desktop\\github_projects\\Scheduled-Whatsapp-Messaging\\chromedriver.exe', options=options)
     driver.maximize_window()
     driver.get('https://web.whatsapp.com')  # Already authenticated
 
