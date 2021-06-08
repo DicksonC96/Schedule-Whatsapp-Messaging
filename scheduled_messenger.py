@@ -8,27 +8,25 @@ import datetime
 import sys
 
 ### Time delay
-#time.sleep(60*60*15)
+time.sleep(60*60*6)
 
 while True:
 
     keys = []
     months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
     days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    mdays = zip(months, days)
-    for month in mdays:
-        for day in range(month[1]):
-            keys.append(month[0]+'-'+str(day))
+    for month in months:
+        for mdays in days:
+            for day in range(mdays):
+                keys.append(month+'-'+str(day+1))
 
-    yday = int(datetime.datetime.now().strftime('%j'))-1#, datetime.datetime.now())
-    englink = 'https://www.sokaglobal.org/resources/daily-encouragement/'+keys[yday+1]+'.html'
-    chilink = 'https://www.sokaglobal.org/chs/resources/daily-encouragement/'+keys[yday+1]+'.html'
+    yday = int(datetime.datetime.now().strftime('%j'))-1 # 0-364
 
-    engtitle = 'Daily Encouragement'
-
-    with open('C:\\Users\\DELL\\Desktop\\guidance2021.csv', 'r', encoding='utf-8-sig') as file:
+    with open('C:\\Users\\DELL\\Desktop\\github_projects\\Scheduled-Whatsapp-Messaging\\guidance2021.csv', 'r', encoding='utf-8-sig') as file:
         data = pd.read_csv(file, sep=';')
-
+    engtitle = 'Daily Encouragement'
+    englink = 'https://www.sokaglobal.org/resources/daily-encouragement/'+keys[yday]+'.html'
+    chilink = 'https://www.sokaglobal.org/chs/resources/daily-encouragement/'+keys[yday]+'.html'
     engdate = data.iloc[yday,0]
     engmessage = data.iloc[yday,1]
     engsensei = 'Daisaku Ikeda, SGI President'
@@ -70,7 +68,7 @@ while True:
     driver.close()
     print('Message sent.', flush=True)
 
-    sleep_duration = 60*10
+    sleep_duration = 60*60*24-1
     rest = interrupt = time.time()
     print(time.strftime('Sleep for %Hh %Mm %Ss ...', time.gmtime(sleep_duration)), flush=True)
     response = 'n'
